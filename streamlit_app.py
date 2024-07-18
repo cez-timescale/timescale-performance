@@ -63,13 +63,17 @@ with hypertable_tab:
 
 with compression_tab:
     st.info(
-    "Query to check compression rate: SELECT pg_size_pretty(before_compression_total_bytes) as Total_Bytes_Before_Compression, pg_size_pretty(after_compression_total_bytes) as Total_Bytes_After_Compression, round(before_compression_total_bytes / after_compression_total_bytes::numeric, 2) as Compression_Ratio FROM hypertable_compression_stats('rides');",
+    "Query to check compression rate: "
+    "SELECT pg_size_pretty(before_compression_total_bytes) as Total_Bytes_Before_Compression, "
+    "pg_size_pretty(after_compression_total_bytes) as Total_Bytes_After_Compression, "
+    "round(before_compression_total_bytes / after_compression_total_bytes::numeric, 2) as Compression_Ratio "
+    "FROM hypertable_compression_stats('rides');",
     icon="✍️"
     )
     
     query = "SELECT pg_size_pretty(before_compression_total_bytes) as Total_Bytes_Before_Compression, pg_size_pretty(after_compression_total_bytes) as Total_Bytes_After_Compression, round(before_compression_total_bytes / after_compression_total_bytes::numeric, 2) as Compression_Ratio FROM hypertable_compression_stats('rides');"
     df_compression = conn.query(query, ttl="0")
-    st.dataframe(df_compression)
+    st.dataframe(df_compression.set_index(df.columns[0]))
 
     st.info(
     "When using compression, data segmenting is based on the way you access the data eg GROUP BY"
