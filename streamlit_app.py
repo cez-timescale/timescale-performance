@@ -46,13 +46,23 @@ with hypertable_tab:
             st.write("CREATE TABLE  rides (vendor_id TEXT, pickup_datetime TIMESTAMP WITHOUT TIME ZONE NOT NULL, dropoff_datetime TIMESTAMP WITHOUT TIME ZONE NOT NULL, passenger_count NUMERIC, trip_distance NUMERIC, pickup_longitude NUMERIC, pickup_latitude NUMERIC, rate_code INTEGER, dropoff_longitude NUMERIC, dropoff_latitude  NUMERIC, payment_type INTEGER, fare_amount NUMERIC, extra NUMERIC, mta_tax NUMERIC, tip_amount NUMERIC, tolls_amount NUMERIC, improvement_surcharge NUMERIC, total_amount NUMERIC);")
 
 
-with compression_tab: 
-    st.write(f"**When using compression data segmenting is based on the way you access the data. With ordering, rows that change over a dimension should be close to each other. By ordering the records over time, they will be compressed and accessed in the same order.**")
-    st.write(f"**To add compression to a table: **")
-    st.write("ALTER TABLE rides SET (timescaledb.compress, timescaledb.compress_segmentby='vendor_id', timescaledb.compress_orderby='pickup_datetime DESC');")
+with compression_tab:
 
-    st.write(f"**Compression policy allows to compress data older than a particular age.**")
-    st.write("SELECT add_compression_policy('rides', INTERVAL '1 day');")
+    st.info(
+    "When using compression data segmenting is based on the way you access the data."
+    "With ordering, rows that change over a dimension should be close to each other."
+    "By ordering the records over time, they will be compressed and accessed in the same order."
+    " "
+    "To add compression to a table:"
+    "ALTER TABLE rides SET (timescaledb.compress, timescaledb.compress_segmentby='vendor_id', timescaledb.compress_orderby='pickup_datetime DESC');",
+    icon="✍️",
+    )
+
+    st.info(
+    "Compression policy allows to compress data older than a particular age."
+    "SELECT add_compression_policy('rides', INTERVAL '1 day');",
+    icon="✍️",
+    )
 
     df_compression = conn.query('SELECT pg_size_pretty(before_compression_total_bytes) as before, pg_size_pretty(after_compression_total_bytes) as after FROM hypertable_compression_stats('rides');', ttl="0")
     st.dataframe(df_compression.set_index(df.columns[0]))
