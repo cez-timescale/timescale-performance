@@ -83,9 +83,12 @@ with hypertable_tab:
 
 with compression_tab:
     st.info(
-    "To add compression to a table, run the following command: "
-    "ALTER TABLE rides SET (timescaledb.compress, timescaledb.compress_segmentby='vendor_id', timescaledb.compress_orderby='pickup_datetime DESC');",
+    "To add compression to a table, run the following command: ",
     icon="✍️",
+    )
+
+    st.success(
+    "ALTER TABLE rides SET (timescaledb.compress, timescaledb.compress_segmentby='vendor_id', timescaledb.compress_orderby='pickup_datetime DESC');"    
     )
     
     query = "SELECT pg_size_pretty(before_compression_total_bytes) as Total_Bytes_Before_Compression, pg_size_pretty(after_compression_total_bytes) as Total_Bytes_After_Compression, round(before_compression_total_bytes / after_compression_total_bytes::numeric, 2) as Compression_Ratio FROM hypertable_compression_stats('rides');"
@@ -101,9 +104,13 @@ with compression_tab:
 
     st.info(
     "Compression policy allows to compress data older than a particular age. To set a policy run the following command: "
-    "SELECT add_compression_policy('rides', INTERVAL '1 day');",
     icon="✍️",
     )
+
+    st.success(
+    "SELECT add_compression_policy('rides', INTERVAL '1 day');"    
+    )
+
 
 with continuous_aggregation_tab:
     st.write("WIP")
