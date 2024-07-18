@@ -47,8 +47,8 @@ with hypertable_tab:
 
 
 with compression_tab: 
-    st.write("With compression: Segmenting is based on the way you access the data.")
-    st.write("With ordering, rows that change over a dimension should be close to each other. By ordering the records over time, they will be compressed and accessed in the same order.")
+    st.write(f"**With compression: Segmenting is based on the way you access the data.**")
+    st.write(f"**With ordering, rows that change over a dimension should be close to each other. By ordering the records over time, they will be compressed and accessed in the same order.**")
     st.write(f"**Add compression to a table: **")
     st.write("ALTER TABLE rides SET (timescaledb.compress, timescaledb.compress_segmentby='vendor_id', timescaledb.compress_orderby='pickup_datetime DESC');")
 
