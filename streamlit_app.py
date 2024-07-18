@@ -13,7 +13,7 @@ with hypertable_tab:
     icon="✍️",
     )
     
-st.info(
+    st.info(
     "SELECT Query: ",
     icon="✍️",
     )
