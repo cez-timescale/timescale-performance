@@ -16,8 +16,9 @@ end_time = time.time()
 
 # Print results.
 st.write("Hypertable Query")
+st.write("Hyoertable Query Complete - Elapsed {0:4.1f}s".format ((end_time - start_time)))  
 st.dataframe(df, use_container_width=True)
-print ("Hyoertable Query Complete - Elapsed {0:4.1f}s".format ((end_time - start_time)))  
+
 
 # Perform pg query.
 df_pg = conn.query('SELECT rate_code, COUNT(vendor_id) AS num_trips FROM rides_pg_table GROUP BY rate_code ORDER BY rate_code;', ttl="0")
