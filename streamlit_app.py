@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.title("Timescale Performance vs PostgreSQL")
+st.title("TimescaleDB vs PostgreSQL Perf")
 st.write(
     "For help head over to [docs.streamlit.io](https://docs.streamlit.io/)."
 )
