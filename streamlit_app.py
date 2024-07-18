@@ -27,16 +27,12 @@ with data_container:
     with timescale:
         st.write("Hypertable Query Complete - Elapsed {0:4.1f}s".format ((hypertable_end_time - hypertable_start_time)))  
         st.dataframe(df.set_index(df.columns[0]))
+        st.write("/* Convert standard table into hypertable partitioned on the time column */");
+        st.write("SELECT create_hypertable('rides', by_range('pickup_datetime'), create_default_indexes=>FALSE);");
+        st.write("/* Additional partitioning dimension to speed up queries */");
+        st.write("SELECT create_hypertable('rides', by_range('pickup_datetime'), create_default_indexes=>FALSE);");
+
     with postgresql:
         st.write("PostgreSQL Query Complete - Elapsed {0:4.1f}s".format ((postgresql_end_time - postgresql_start_time))) 
         st.dataframe(df_pg.set_index(df_pg.columns[0]))
-
-
-with data_container:
-    timescale, postgresql = st.columns(2)
-    row1, row2 = st.rows(2)
-
-for col in row1 + row2:
-    tile = col.container()
-    st.write("Hypertable Query Complete - Elapsed {0:4.1f}s".format ((hypertable_end_time - hypertable_start_time)))  
-    st.dataframe(df.set_index(df.columns[0]))
+        st.write("")
