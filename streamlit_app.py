@@ -89,7 +89,7 @@ with compression_tab:
     from psycopg2.extras import RealDictCursor
 
     # Load secrets
-    st.secrets["postgres"]
+    st.secrets["connections.postgresql"]
 
     def get_db_connection():
         conn = psycopg2.connect(
