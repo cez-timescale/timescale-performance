@@ -1,6 +1,11 @@
 import streamlit as st
 import time
 
+# Set up tabs
+performace_tab, compression_tab, continuous_aggregation_tab = st.tabs(["Performance", "Compression", "Continuous Aggregation"])
+
+with performace_tab:
+
 st.title("TimescaleDB vs PostgreSQL")
 st.write("Try Timescale for Free [Link](https://www.timescale.com/?utm_source=google&utm_medium=cpc&utm_campaign=brand&utm_term=timescale&utm_campaign=g_search_brand&utm_source=adwords&utm_medium=ppc&hsa_acc=9771591554&hsa_cam=20915411738&hsa_grp=163076503891&hsa_ad=686577754033&hsa_src=g&hsa_tgt=kwd-11120288971&hsa_kw=timescale&hsa_mt=p&hsa_net=adwords&hsa_ver=3&gad_source=1&gclid=Cj0KCQjw-uK0BhC0ARIsANQtgGNVDQ2KKT5_xr-baYDL-aLL-qiLpHnEl23YqAjm-dM3oL3AEB8DMj8aAvIbEALw_wcB).")
 st.write("Querying 10M rides table from NYC cab dataset")
