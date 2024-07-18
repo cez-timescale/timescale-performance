@@ -47,13 +47,21 @@ with hypertable_tab:
             st.dataframe(df.set_index(df.columns[0]))
 
             st.info(
-            "To convert standard table into hypertable partitioned on the time column, run the following: SELECT create_hypertable('rides', by_range('pickup_datetime'), create_default_indexes=>FALSE);",
+            "To convert standard table into hypertable partitioned on the time column, run the following: ",
             icon="✍️",
             )
 
+            st.success(
+            "SELECT create_hypertable('rides', by_range('pickup_datetime'), create_default_indexes=>FALSE);"
+            )
+
             st.info(
-            "To setup Additional partitioning dimension to speed up queries, run the following: SELECT add_dimension('rides', by_hash('payment_type', 2));",
+            "To setup Additional partitioning dimension to speed up queries, run the following: ",
             icon="✍️",
+            )
+
+            st.success(
+            "SELECT add_dimension('rides', by_hash('payment_type', 2));"    
             )
 
         with postgresql:
