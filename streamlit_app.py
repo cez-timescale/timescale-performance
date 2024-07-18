@@ -62,7 +62,6 @@ with hypertable_tab:
             )
 
 with compression_tab:
-
     st.info(
     "Query to check compression rate:"
     "SELECT pg_size_pretty(before_compression_total_bytes) as Total_Bytes_Before_Compression, pg_size_pretty(after_compression_total_bytes) as Total_Bytes_After_Compression, round(before_compression_total_bytes / after_compression_total_bytes::numeric, 2) as Compression_Ratio FROM hypertable_compression_stats('rides');",
