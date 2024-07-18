@@ -13,9 +13,13 @@ with hypertable_tab:
     icon="✍️",
     )
     
-    st.info(
-    "SELECT Query: SQL: SELECT rate_code, COUNT(vendor_id) AS num_trips FROM rides GROUP BY rate_code ORDER BY rate_code;",
+st.info(
+    "SELECT Query: ",
     icon="✍️",
+    )
+
+    st.success(
+    "SELECT rate_code, COUNT(vendor_id) AS num_trips FROM rides GROUP BY rate_code ORDER BY rate_code;"
     )
     
     # Initialize connection.
