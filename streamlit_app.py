@@ -17,3 +17,9 @@ df = conn.query('SELECT rate_code, COUNT(vendor_id) AS num_trips FROM rides GROU
 
 # Print results.
 st.dataframe(df, use_container_width=True)
+
+# Perform query.
+df_pg = conn.query('SELECT rate_code, COUNT(vendor_id) AS num_trips FROM rides_pg_table GROUP BY rate_code ORDER BY rate_code;', ttl="0")
+
+# Print results.
+st.dataframe(df_pg, use_container_width=True)
