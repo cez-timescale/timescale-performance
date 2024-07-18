@@ -84,6 +84,34 @@ with compression_tab:
 #    df_compression = conn.query('SELECT pg_size_pretty(before_compression_total_bytes) as before, pg_size_pretty(after_compression_total_bytes) as after FROM hypertable_compression_stats('rides');', ttl="0")
 #    st.dataframe(df_compression.set_index(df.columns[0]))
 
+    import streamlit as st
+    import psycopg2
+    from psycopg2.extras import RealDictCursor
+
+    # Load secrets
+    st.secrets["postgres"]
+
+    def get_db_connection():
+        conn = psycopg2.connect(
+            host=st.secrets["connections.postgresql"]["host"],
+            database=st.secrets["connections.postgresql"]["dbname"],
+            user=st.secrets["connections.postgresql"]["user"],
+            password=st.secrets["connections.postgresql"]["password"],
+            port=st.secrets["connections.postgresql"]["port"],
+        )
+        return conn
+
+    def run_static_query():
+        query = "SELECT pg_size_pretty(before_compression_total_bytes) as before, pg_size_pretty(after_compression_total_bytes) as after FROM hypertable_compression_stats('rides');"  # Replace with your static query
+        conn = get_db_connection()
+        try:
+            with conn.cursor(cursor_factory=RealDictCursor) as cur:
+                cur.execute(query)
+                result = cur.fetchall()
+                return result
+        finally:
+            conn.close()
+
 with continuous_aggregation_tab:
     st.write("WIP")
 
