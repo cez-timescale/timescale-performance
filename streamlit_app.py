@@ -8,9 +8,16 @@ st.write("Try Timescale for Free [Link](https://www.timescale.com/?utm_source=go
 hypertable_tab, compression_tab, continuous_aggregation_tab, data_retention_tab, pgvectorscale_tab = st.tabs(["Hypertable", "Compression", "Continuous Aggregation", "Data Retention", "Pgvectorscale"])
 
 with hypertable_tab:
-    st.write("Querying 10M rides table from NYC cab dataset")
-    st.write("SQL: SELECT rate_code, COUNT(vendor_id) AS num_trips FROM rides GROUP BY rate_code ORDER BY rate_code;")
-
+    st.info(
+    "Querying 10M rides table from NYC cab dataset",
+    icon="✍️",
+    )
+    
+    st.info(
+    "SELECT Query: SQL: SELECT rate_code, COUNT(vendor_id) AS num_trips FROM rides GROUP BY rate_code ORDER BY rate_code;",
+    icon="✍️",
+    )
+    
     # Initialize connection.
     conn = st.connection("postgresql", type="sql")
 
