@@ -81,8 +81,44 @@ with compression_tab:
     icon="✍️",
     )
 
-#   df_compression = conn.query('SELECT pg_size_pretty(before_compression_total_bytes) as before, pg_size_pretty(after_compression_total_bytes) as after FROM hypertable_compression_stats('rides');', ttl="0")
-    st.dataframe(df_compression.set_index(df.columns[0]))
+#  df_compression = conn.query('SELECT pg_size_pretty(before_compression_total_bytes) as before, pg_size_pretty(after_compression_total_bytes) as after FROM hypertable_compression_stats('rides');', ttl="0")
+#    st.dataframe(df_compression.set_index(df.columns[0]))
+
+    import pandas as pd
+    import psycopg2
+    from psycopg2 import sql
+
+    # Function to execute the query and return a DataFrame
+    def query_database():
+        conn = psycopg2.connect(
+            dbname=st.secrets["postgres"]["dbname"],
+            user=st.secrets["postgres"]["user"],
+            password=st.secrets["postgres"]["password"],
+            host=st.secrets["postgres"]["host"],
+            port=st.secrets["postgres"]["port"]
+        )
+    
+        query = sql.SQL("""
+        SELECT 
+            pg_size_pretty(before_compression_total_bytes) as before, 
+            pg_size_pretty(after_compression_total_bytes) as after 
+        FROM hypertable_compression_stats('rides');
+        """)
+    
+        df = pd.read_sql_query(query, conn)
+        conn.close()
+    
+        return df
+
+    # Streamlit app
+    st.title("Compression Stats")
+
+    df_compression = query_database()
+    st.write(df_compression)
+
+
+
+
 
 with continuous_aggregation_tab:
     st.write("WIP")
