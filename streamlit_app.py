@@ -14,19 +14,12 @@ hypertable_start_time = time.time()
 df = conn.query('SELECT rate_code, COUNT(vendor_id) AS num_trips FROM rides GROUP BY rate_code ORDER BY rate_code;', ttl="0")
 hypertable_end_time = time.time()
 
-# Print results.
-st.write("Hypertable Query Complete - Elapsed {0:4.1f}s".format ((hypertable_end_time - hypertable_start_time)))  
-st.dataframe(df.set_index(df.columns[0]))
-
 # Perform pg query.
 postgresql_start_time = time.time()
 df_pg = conn.query('SELECT rate_code, COUNT(vendor_id) AS num_trips FROM rides_pg_table GROUP BY rate_code ORDER BY rate_code;', ttl="0")
 postgresql_end_time = time.time()
 
 # Print results.
-st.write("PostgreSQL Query Complete - Elapsed {0:4.1f}s".format ((postgresql_end_time - postgresql_start_time))) 
-st.dataframe(df_pg.set_index(df_pg.columns[0]))
-
 data_container = st.container()
 
 with data_container:
