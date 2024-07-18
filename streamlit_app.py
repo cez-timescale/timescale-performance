@@ -73,7 +73,7 @@ with compression_tab:
     
     query = "SELECT pg_size_pretty(before_compression_total_bytes) as Total_Bytes_Before_Compression, pg_size_pretty(after_compression_total_bytes) as Total_Bytes_After_Compression, round(before_compression_total_bytes / after_compression_total_bytes::numeric, 2) as Compression_Ratio FROM hypertable_compression_stats('rides');"
     df_compression = conn.query(query, ttl="0")
-    st.dataframe(df_compression.set_index(df.columns[0]))
+    st.dataframe(df_compression.set_index(df_compression.columns[0]))
 
     st.info(
     "To add compression to a table, run the following command: "
