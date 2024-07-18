@@ -85,7 +85,7 @@ with compression_tab:
 
 #   df_compression = conn.query('SELECT pg_size_pretty(before_compression_total_bytes) as Total_Before_Compression, pg_size_pretty(after_compression_total_bytes) as Total_After_Compression FROM hypertable_compression_stats('rides');', ttl="0")   
     df_compression = conn.query(query, ttl="0")
-    st.dataframe(df_compression.set_index(df_compression.columns[0]))
+    st.dataframe(df_compression)
 
 
 with continuous_aggregation_tab:
