@@ -13,7 +13,7 @@ import streamlit as st
 conn = st.connection("postgresql", type="sql")
 
 # Perform query.
-df = conn.query('SELECT rate_code, COUNT(vendor_id) AS num_trips FROM rides GROUP BY rate_code ORDER BY rate_code;', ttl="10m")
+df = conn.query('SELECT rate_code, COUNT(vendor_id) AS num_trips FROM rides GROUP BY rate_code ORDER BY rate_code;', ttl="0")
 
 # Print results.
 st.dataframe(df, use_container_width=True)
