@@ -55,13 +55,13 @@ with compression_tab:
     )
     
     st.info(
-    "To add compression to a table:"
+    "To add compression to a table, run the following command: "
     "ALTER TABLE rides SET (timescaledb.compress, timescaledb.compress_segmentby='vendor_id', timescaledb.compress_orderby='pickup_datetime DESC');",
     icon="✍️",
     )
 
     st.info(
-    "Compression policy allows to compress data older than a particular age."
+    "Compression policy allows to compress data older than a particular age. To set a policy run the following command: "
     "SELECT add_compression_policy('rides', INTERVAL '1 day');",
     icon="✍️",
     )
