@@ -76,17 +76,17 @@ with compression_tab:
     st.dataframe(df_compression.set_index(df.columns[0]))
 
     st.info(
-    "When using compression, data segmenting is based on the way you access the data eg GROUP BY"
-    "With ordering, rows that change over a dimension should be close to each other."
-    "By ordering the records over time, they will be compressed and accessed in the same order.",
-    icon="✍️"
-    )
-    
-    st.info(
     "To add compression to a table, run the following command: "
     "ALTER TABLE rides SET (timescaledb.compress, timescaledb.compress_segmentby='vendor_id', timescaledb.compress_orderby='pickup_datetime DESC');",
     icon="✍️",
     )
+
+    st.info(
+    "When using compression, data segmenting is based on the way you access the data eg GROUP BY"
+    "With ordering, rows that change over a dimension should be close to each other."
+    "By ordering the records over time, they will be compressed and accessed in the same order.",
+    icon="✍️"
+    ) 
 
     st.info(
     "Compression policy allows to compress data older than a particular age. To set a policy run the following command: "
