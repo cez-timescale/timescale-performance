@@ -16,6 +16,7 @@ end_time = time.time()
 
 # Print results.
 st.write("Hypertable Query Complete - Elapsed {0:4.1f}s".format ((end_time - start_time)))  
+st.dataframe(df.set_index(df.columns[0]))
 st.dataframe(df, use_container_width=True)
 
 
@@ -26,4 +27,5 @@ end_time = time.time()
 
 # Print results.
 st.write("PostgreSQL Query Complete - Elapsed {0:4.1f}s".format ((end_time - start_time))) 
+st.dataframe(df_pg.set_index(df_pg.columns[0]))
 st.dataframe(df_pg, use_container_width=True)
