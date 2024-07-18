@@ -2,7 +2,7 @@ import streamlit as st
 import time
 
 st.title("TimescaleDB vs PostgreSQL")
-st.write("For help head over to [docs.streamlit.io](https://docs.streamlit.io/).")
+st.write("Try Timescale for Free [Link](https://www.timescale.com/?utm_source=google&utm_medium=cpc&utm_campaign=brand&utm_term=timescale&utm_campaign=g_search_brand&utm_source=adwords&utm_medium=ppc&hsa_acc=9771591554&hsa_cam=20915411738&hsa_grp=163076503891&hsa_ad=686577754033&hsa_src=g&hsa_tgt=kwd-11120288971&hsa_kw=timescale&hsa_mt=p&hsa_net=adwords&hsa_ver=3&gad_source=1&gclid=Cj0KCQjw-uK0BhC0ARIsANQtgGNVDQ2KKT5_xr-baYDL-aLL-qiLpHnEl23YqAjm-dM3oL3AEB8DMj8aAvIbEALw_wcB).")
 st.write("Querying 10M rides table from NYC cab dataset")
 st.write("SQL Executed: SELECT rate_code, COUNT(vendor_id) AS num_trips FROM rides GROUP BY rate_code ORDER BY rate_code;")
 
@@ -23,7 +23,7 @@ postgresql_end_time = time.time()
 data_container = st.container()
 
 with data_container:
-    
+
     postgresql, timescale  = st.columns(2)
 
     with timescale:
