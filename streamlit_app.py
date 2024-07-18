@@ -33,8 +33,8 @@ with data_container:
 
 
 with data_container:
-    row1 = st.columns(2)
-    row2 = st.columns(2)
+    timescale, postgresql = st.columns(2)
+    row1, row2 = st.rows(2)
 
 for col in row1 + row2:
     tile = col.container()
