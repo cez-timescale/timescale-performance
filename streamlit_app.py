@@ -48,13 +48,13 @@ with hypertable_tab:
 
 with compression_tab: 
     st.write(f"**When using compression data segmenting is based on the way you access the data. With ordering, rows that change over a dimension should be close to each other. By ordering the records over time, they will be compressed and accessed in the same order.**")
-    st.write(f"**Add compression to a table: **")
+    st.write(f"**To add compression to a table: **")
     st.write("ALTER TABLE rides SET (timescaledb.compress, timescaledb.compress_segmentby='vendor_id', timescaledb.compress_orderby='pickup_datetime DESC');")
 
     st.write(f"**Compression policy allows to compress data older than a particular age.**")
     st.write("SELECT add_compression_policy('rides', INTERVAL '1 day');")
 
-    df_compression = conn.query('SELECT pg_size_pretty(before_compression_total_bytes) as before, pg_size_pretty(after_compression_total_bytes) as after FROM hypertable_compression_stats(`'`rides`'`);', ttl="0")
+    df_compression = conn.query('SELECT pg_size_pretty(before_compression_total_bytes) as before, pg_size_pretty(after_compression_total_bytes) as after FROM hypertable_compression_stats('rides');', ttl="0")
     st.dataframe(df_compression.set_index(df.columns[0]))
 
 with continuous_aggregation_tab:
