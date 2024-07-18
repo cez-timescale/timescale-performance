@@ -24,9 +24,18 @@ data_container = st.container()
 
 with data_container:
     timescale, postgresql = st.columns(2)
-    with postgresql:
-        st.write("PostgreSQL Query Complete - Elapsed {0:4.1f}s".format ((postgresql_end_time - postgresql_start_time))) 
-        st.dataframe(df_pg.set_index(df_pg.columns[0]))
     with timescale:
         st.write("Hypertable Query Complete - Elapsed {0:4.1f}s".format ((hypertable_end_time - hypertable_start_time)))  
         st.dataframe(df.set_index(df.columns[0]))
+    with postgresql:
+        st.write("PostgreSQL Query Complete - Elapsed {0:4.1f}s".format ((postgresql_end_time - postgresql_start_time))) 
+        st.dataframe(df_pg.set_index(df_pg.columns[0]))
+
+
+with data_container:
+    row1 = st.columns(2)
+    row2 = st.columns(2)
+
+for col in row1 + row2:
+    tile = col.container(height=120)
+    tile.title(":balloon:")
