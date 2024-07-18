@@ -17,7 +17,7 @@ execution_time = end_time - start_time
 
 # Print results.
 st.write("Hypertable Query")
-st.write(execution_time)  
+st.write("Hypertable Query Complete - Elapsed {0:4.1f}s".format ((end_time - start_time)))  
 st.dataframe(df, use_container_width=True)
 
 
