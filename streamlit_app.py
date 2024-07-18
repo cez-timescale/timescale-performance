@@ -37,5 +37,6 @@ with data_container:
     row2 = st.columns(2)
 
 for col in row1 + row2:
-    tile = col.container(height=120)
-    tile.title(":balloon:")
+    tile = col.container()
+    st.write("Hypertable Query Complete - Elapsed {0:4.1f}s".format ((hypertable_end_time - hypertable_start_time)))  
+    st.dataframe(df.set_index(df.columns[0]))
