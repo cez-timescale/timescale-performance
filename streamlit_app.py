@@ -50,7 +50,8 @@ with compression_tab:
     st.info(
     "When using compression, data segmenting is based on the way you access the data."
     "With ordering, rows that change over a dimension should be close to each other."
-    "By ordering the records over time, they will be compressed and accessed in the same order."
+    "By ordering the records over time, they will be compressed and accessed in the same order.",
+    icon="✍️"
     )
     
     st.info(
