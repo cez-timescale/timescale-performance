@@ -73,9 +73,9 @@ with compression_tab:
     st.dataframe(df_compression.set_index(df_compression.columns[0]))
 
     st.info(
-    "When using compression, data segmenting is based on the way you access the data eg GROUP BY"
-    "With ordering, rows that change over a dimension should be close to each other."
-    "By ordering the records over time, they will be compressed and accessed in the same order.",
+    "When using compression, data segmenting is based on the way you access the data eg GROUP BY "
+    "With ordering, rows that change over a dimension should be close to each other. "
+    "By ordering the records over time, they will be compressed and accessed in the same order. ",
     icon="✍️"
     ) 
 
