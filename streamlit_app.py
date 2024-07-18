@@ -64,12 +64,16 @@ with hypertable_tab:
             "SELECT add_dimension('rides', by_hash('payment_type', 2));"    
             )
 
+            st.success(
+            "SELECT add_dimension('rides', by_hash('rate_code', 2));"
+            )
+
         with postgresql:
             st.subheader("PostgreSQL - {0:4.1f} sec".format ((postgresql_end_time - postgresql_start_time))) 
             st.dataframe(df_pg.set_index(df_pg.columns[0]))
             
             st.info(
-            "Create a PostgreSQL table:  ",
+            "Create a PostgreSQL table: ",
             icon="✍️",
             )
 
