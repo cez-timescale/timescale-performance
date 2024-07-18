@@ -36,4 +36,4 @@ with data_container:
         st.write("PostgreSQL Query Complete - Elapsed {0:4.1f}s".format ((postgresql_end_time - postgresql_start_time))) 
         st.dataframe(df_pg.set_index(df_pg.columns[0]))
         st.write("/* Create a pg table */")
-        st.write("CREATE TABLE "rides"(vendor_id TEXT, pickup_datetime TIMESTAMP WITHOUT TIME ZONE NOT NULL, ..., total_amount NUMERIC);");
+        st.write("CREATE TABLE rides(vendor_id TEXT, pickup_datetime TIMESTAMP WITHOUT TIME ZONE NOT NULL, ..., total_amount NUMERIC);");
