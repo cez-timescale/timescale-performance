@@ -13,10 +13,11 @@ conn = st.connection("postgresql", type="sql")
 start_time = time.time()
 df = conn.query('SELECT rate_code, COUNT(vendor_id) AS num_trips FROM rides GROUP BY rate_code ORDER BY rate_code;', ttl="0")
 end_time = time.time()
+execution_time = end_time - start_time
 
 # Print results.
 st.write("Hypertable Query")
-st.write("Hyoertable Query Complete - Elapsed {0:4.1f}s".format ((end_time - start_time)))  
+st.write(execution_time)  
 st.dataframe(df, use_container_width=True)
 
 
