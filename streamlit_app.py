@@ -9,7 +9,7 @@ hypertable_tab, compression_tab, continuous_aggregation_tab, data_retention_tab,
 
 with hypertable_tab:
     st.write("Querying 10M rides table from NYC cab dataset")
-    st.write("SQL Executed: \n\n SELECT rate_code, \n\n COUNT(vendor_id) AS num_trips \n\n FROM rides \n\n GROUP BY rate_code \n\n ORDER BY rate_code;")
+    st.write("SQL Executed: \n\n SELECT rate_code, COUNT(vendor_id) AS num_trips FROM rides \n\n GROUP BY rate_code ORDER BY rate_code;")
 
     # Initialize connection.
     conn = st.connection("postgresql", type="sql")
