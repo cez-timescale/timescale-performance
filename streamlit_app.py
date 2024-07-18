@@ -4,7 +4,7 @@ import time
 st.title("TimescaleDB vs PostgreSQL Perf")
 st.write("For help head over to [docs.streamlit.io](https://docs.streamlit.io/).")
 st.write("Querying 10M rides table from NYC can dataset")
-st.write("SQL: SELECT rate_code, COUNT(vendor_id) AS num_trips FROM rides GROUP BY rate_code ORDER BY rate_code;")
+st.write("SQL Executed: SELECT rate_code, COUNT(vendor_id) AS num_trips FROM rides GROUP BY rate_code ORDER BY rate_code;")
 
 # Initialize connection.
 conn = st.connection("postgresql", type="sql")
