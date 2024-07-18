@@ -2,8 +2,16 @@ import streamlit as st
 
 st.title("Timescale Performance vs PostgreSQL")
 st.write(
-    "Let's start building! For help and inspiration, head over to [docs.streamlit.io](https://docs.streamlit.io/)."
+    "For help head over to [docs.streamlit.io](https://docs.streamlit.io/)."
 )
+st.write(
+    "Querying 10M rides table from NYC can dataset"
+)
+
+st.write(
+    "SQL: SELECT rate_code, COUNT(vendor_id) AS num_trips FROM rides GROUP BY rate_code ORDER BY rate_code;"
+)
+
 
 # streamlit_app.py
 
