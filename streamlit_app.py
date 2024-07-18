@@ -16,5 +16,4 @@ conn = st.connection("postgresql", type="sql")
 df = conn.query('SELECT rate_code, COUNT(vendor_id) AS num_trips FROM rides GROUP BY rate_code ORDER BY rate_code;', ttl="10m")
 
 # Print results.
-for row in df.itertuples():
-    st.write(f"{row.rate_code} has a :{row.num_trips}:")
+st.dataframe(df, use_container_width=True)
