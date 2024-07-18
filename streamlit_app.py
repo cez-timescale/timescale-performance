@@ -44,3 +44,10 @@ with performace_tab:
             st.dataframe(df_pg.set_index(df_pg.columns[0]))
             st.write(f"**Create a pg table:**")
             st.write("CREATE TABLE  rides (vendor_id TEXT, pickup_datetime TIMESTAMP WITHOUT TIME ZONE NOT NULL, dropoff_datetime TIMESTAMP WITHOUT TIME ZONE NOT NULL, passenger_count NUMERIC, trip_distance NUMERIC, pickup_longitude NUMERIC, pickup_latitude NUMERIC, rate_code INTEGER, dropoff_longitude NUMERIC, dropoff_latitude  NUMERIC, payment_type INTEGER, fare_amount NUMERIC, extra NUMERIC, mta_tax NUMERIC, tip_amount NUMERIC, tolls_amount NUMERIC, improvement_surcharge NUMERIC, total_amount NUMERIC);")
+
+
+with compression_tab: 
+    st.write("WIP")
+
+with continuous_aggregation_tab:
+    st.write("WIP")
