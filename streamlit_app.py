@@ -27,13 +27,13 @@ with data_container:
     with timescale:
         st.write("Hypertable Query Complete - Elapsed {0:4.1f}s".format ((hypertable_end_time - hypertable_start_time)))  
         st.dataframe(df.set_index(df.columns[0]))
-        st.write(f"**Convert standard table into hypertable partitioned on the time column:**");
-        st.write("SELECT create_hypertable('rides', by_range('pickup_datetime'), create_default_indexes=>FALSE);");
-        st.write(f"**Additional partitioning dimension to speed up queries:**");
-        st.write("SELECT create_hypertable('rides', by_range('pickup_datetime'), create_default_indexes=>FALSE);");
+        st.write(f"**Convert standard table into hypertable partitioned on the time column:**")
+        st.write("SELECT create_hypertable('rides', by_range('pickup_datetime'), create_default_indexes=>FALSE);")
+        st.write(f"**Additional partitioning dimension to speed up queries:**")
+        st.write("SELECT create_hypertable('rides', by_range('pickup_datetime'), create_default_indexes=>FALSE);")
 
     with postgresql:
         st.write("PostgreSQL Query Complete - Elapsed {0:4.1f}s".format ((postgresql_end_time - postgresql_start_time))) 
         st.dataframe(df_pg.set_index(df_pg.columns[0]))
         st.write(f"**Create a pg table:**")
-        st.write("CREATE TABLE  rides (vendor_id TEXT, pickup_datetime TIMESTAMP WITHOUT TIME ZONE NOT NULL, dropoff_datetime TIMESTAMP WITHOUT TIME ZONE NOT NULL, passenger_count NUMERIC, trip_distance NUMERIC, pickup_longitude NUMERIC, pickup_latitude NUMERIC, rate_code INTEGER, dropoff_longitude NUMERIC, dropoff_latitude  NUMERIC, payment_type INTEGER, fare_amount NUMERIC, extra NUMERIC, mta_tax NUMERIC, tip_amount NUMERIC, tolls_amount NUMERIC, improvement_surcharge NUMERIC, total_amount NUMERIC);");
+        st.write("CREATE TABLE  rides (vendor_id TEXT, pickup_datetime TIMESTAMP WITHOUT TIME ZONE NOT NULL, dropoff_datetime TIMESTAMP WITHOUT TIME ZONE NOT NULL, passenger_count NUMERIC, trip_distance NUMERIC, pickup_longitude NUMERIC, pickup_latitude NUMERIC, rate_code INTEGER, dropoff_longitude NUMERIC, dropoff_latitude  NUMERIC, payment_type INTEGER, fare_amount NUMERIC, extra NUMERIC, mta_tax NUMERIC, tip_amount NUMERIC, tolls_amount NUMERIC, improvement_surcharge NUMERIC, total_amount NUMERIC);")
