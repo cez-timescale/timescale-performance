@@ -103,7 +103,7 @@ with compression_tab:
     ) 
 
     st.info(
-    "Compression policy allows to compress data older than a particular age. To set a policy run the following command: "
+    "Compression policy allows to compress data older than a particular age. To set a policy run the following command: ",
     icon="✍️",
     )
 
