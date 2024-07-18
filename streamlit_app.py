@@ -30,7 +30,7 @@ with data_container:
         st.write(f"**Convert standard table into hypertable partitioned on the time column:**")
         st.write("SELECT create_hypertable('rides', by_range('pickup_datetime'), create_default_indexes=>FALSE);")
         st.write(f"**Additional partitioning dimension to speed up queries:**")
-        st.write("SELECT create_hypertable('rides', by_range('pickup_datetime'), create_default_indexes=>FALSE);")
+        st.write("SELECT add_dimension('rides', by_hash('payment_type', 2));")
 
     with postgresql:
         st.subheader("PostgreSQL Query - {0:4.1f} sec".format ((postgresql_end_time - postgresql_start_time))) 
