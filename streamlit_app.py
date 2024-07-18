@@ -91,11 +91,11 @@ with compression_tab:
     # Function to execute the query and return a DataFrame
     def query_database():
         conn = psycopg2.connect(
-            dbname=st.secrets["postgres"]["dbname"],
-            user=st.secrets["postgres"]["user"],
-            password=st.secrets["postgres"]["password"],
-            host=st.secrets["postgres"]["host"],
-            port=st.secrets["postgres"]["port"]
+            dbname=st.secrets["connections.postgresql"]["dbname"],
+            user=st.secrets["connections.postgresql"]["user"],
+            password=st.secrets["connections.postgresql"]["password"],
+            host=st.secrets["connections.postgresql"]["host"],
+            port=st.secrets["connections.postgresql"]["port"]
         )
     
         query = sql.SQL("""
