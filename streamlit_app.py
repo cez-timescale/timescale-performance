@@ -81,12 +81,7 @@ with compression_tab:
     icon="✍️",
     )
 
-    # Example text variable
-    text_var = "rides"
-
- #  df_compression = conn.query('SELECT pg_size_pretty(before_compression_total_bytes) as before, pg_size_pretty(after_compression_total_bytes) as after FROM hypertable_compression_stats('rides');', ttl="0")
- 
-    df_compression = conn.query('SELECT pg_size_pretty(before_compression_total_bytes) as before, pg_size_pretty(after_compression_total_bytes) as after FROM hypertable_compression_stats(:text_var);', ttl="0")
+    df_compression = conn.query('SELECT pg_size_pretty(before_compression_total_bytes) as before, pg_size_pretty(after_compression_total_bytes) as after FROM hypertable_compression_stats('rides');', ttl="0")
     st.dataframe(df_compression.set_index(df.columns[0]))
 
 with continuous_aggregation_tab:
