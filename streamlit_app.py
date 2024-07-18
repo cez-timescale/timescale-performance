@@ -26,3 +26,13 @@ end_time = time.time()
 # Print results.
 st.write("PostgreSQL Query Complete - Elapsed {0:4.1f}s".format ((end_time - start_time))) 
 st.dataframe(df_pg.set_index(df_pg.columns[0]))
+
+tab1, tab2 = st.tabs(["Timescale", "PostgreSQL"])
+
+with tab1:
+    st.write("Hypertable Query Complete - Elapsed {0:4.1f}s".format ((end_time - start_time)))  
+    st.dataframe(df.set_index(df.columns[0]))
+
+with tab2:
+ st.write("PostgreSQL Query Complete - Elapsed {0:4.1f}s".format ((end_time - start_time))) 
+ st.dataframe(df_pg.set_index(df_pg.columns[0]))
