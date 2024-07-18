@@ -62,6 +62,19 @@ with hypertable_tab:
             )
 
 with compression_tab:
+
+    st.info(
+    "Query to check compression rate:"
+    "SELECT pg_size_pretty(before_compression_total_bytes) as Total_Bytes_Before_Compression, pg_size_pretty(after_compression_total_bytes) as Total_Bytes_After_Compression, round(before_compression_total_bytes / after_compression_total_bytes::numeric, 2) as Compression_Ratio FROM hypertable_compression_stats('rides');",
+    icon="✍️"
+    )
+    
+
+    query = "SELECT pg_size_pretty(before_compression_total_bytes) as Total_Bytes_Before_Compression, pg_size_pretty(after_compression_total_bytes) as Total_Bytes_After_Compression, round(before_compression_total_bytes / after_compression_total_bytes::numeric, 2) as Compression_Ratio FROM hypertable_compression_stats('rides');"
+    df_compression = conn.query(query, ttl="0")
+    st.dataframe(df_compression)
+
+
     st.info(
     "When using compression, data segmenting is based on the way you access the data eg GROUP BY"
     "With ordering, rows that change over a dimension should be close to each other."
@@ -80,13 +93,6 @@ with compression_tab:
     "SELECT add_compression_policy('rides', INTERVAL '1 day');",
     icon="✍️",
     )
-
-    query = "SELECT pg_size_pretty(before_compression_total_bytes) as Total_Bytes_Before_Compression, pg_size_pretty(after_compression_total_bytes) as Total_Bytes_After_Compression, round(before_compression_total_bytes / after_compression_total_bytes::numeric, 2) as Compression_Ratio FROM hypertable_compression_stats('rides');"
-
-#   df_compression = conn.query('SELECT pg_size_pretty(before_compression_total_bytes) as Total_Before_Compression, pg_size_pretty(after_compression_total_bytes) as Total_After_Compression FROM hypertable_compression_stats('rides');', ttl="0")   
-    df_compression = conn.query(query, ttl="0")
-    st.dataframe(df_compression)
-
 
 with continuous_aggregation_tab:
     st.write("WIP")
