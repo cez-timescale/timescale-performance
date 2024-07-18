@@ -1,7 +1,7 @@
 import streamlit as st
 import time
 
-st.title("TimescaleDB vs PostgreSQL Bake-Off")
+st.title("TimescaleDB vs PostgreSQL")
 st.write("For help head over to [docs.streamlit.io](https://docs.streamlit.io/).")
 st.write("Querying 10M rides table from NYC cab dataset")
 st.write("SQL Executed: SELECT rate_code, COUNT(vendor_id) AS num_trips FROM rides GROUP BY rate_code ORDER BY rate_code;")
