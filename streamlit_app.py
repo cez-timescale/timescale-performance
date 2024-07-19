@@ -139,14 +139,14 @@ with continuous_aggregation_tab:
     chart_data = pd.DataFrame(df_base_table, columns=["num_trips"])
     st.bar_chart(chart_data)
 
-    # Run MV query
+    # Run materialized_view query
     query = "SELECT interval, num_trips FROM ride_stats_by_hour ORDER BY interval ASC;"
     mv_start_time = time.time()
     df_mv = conn.query(query, ttl="0")
     mv_end_time = time.time()
 
-    # Display MV results
-    st.subheader("Querying MV - {0:4.1f} sec".format ((mv_end_time - mv_start_time)))  
+    # Display materialized_view results
+    st.subheader("Querying Materialized View - {0:4.1f} sec".format ((mv_end_time - mv_start_time)))  
     chart_data = pd.DataFrame(df_mv, columns=["num_trips"])
     st.bar_chart(chart_data)
     
