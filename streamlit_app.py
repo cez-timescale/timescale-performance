@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import altair as alt
 import time
 
 st.title("TimescaleDB vs PostgreSQL")
@@ -148,8 +149,19 @@ with continuous_aggregation_tab:
     st.dataframe(df_mv.set_index(df_mv.columns[0]))
 
     # Display the bar chart in Streamlit
-    mv_chart_data = pd.DataFrame(df_mv)
-    st.bar_chart(mv_chart_data)
+    df_chart = pd.melt(
+        df_mv.reset_index(), id_vars="interval", value_name="num_trips"
+    )
+    chart = (
+        alt.Chart(df_chart)
+        .mark_line()
+        .encode(
+            x=alt.X("interval:N", title="Interval"),
+            y=alt.Y("num_trips:Q", title="Number of Trips")
+        )
+        .properties(height=320)
+    )
+    st.altair_chart(chart, use_container_width=True)
 
     st.info("Add a refresh policy to keep the continuous aggregate up-to-date: ",
     icon="✍️"
