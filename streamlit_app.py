@@ -137,9 +137,6 @@ with continuous_aggregation_tab:
     st.subheader("Querying raw data - {0:4.1f} sec".format ((base_table_end_time - base_table_start_time)))  
     st.dataframe(df_base_table.set_index(df_base_table.columns[0]))
 
-    # Display the bar chart in Streamlit
- #   st.bar_chart(df_base_table)
-
     # Run MV query
     query = "SELECT interval, num_trips FROM ride_stats_by_hour;"
     mv_start_time = time.time()
