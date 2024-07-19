@@ -132,7 +132,7 @@ with continuous_aggregation_tab:
     base_table_end_time = time.time()
 
     #Disply results
-    st.subheader("Hypertable - {0:4.1f} sec".format ((base_table_end_time - base_table_start_time)))  
+    st.subheader("Querying raw data - {0:4.1f} sec".format ((base_table_end_time - base_table_start_time)))  
     st.dataframe(df_base_table.set_index(df_base_table.columns[0]))
 
 
