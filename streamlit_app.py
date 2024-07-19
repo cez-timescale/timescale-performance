@@ -149,7 +149,7 @@ with continuous_aggregation_tab:
     st.dataframe(df_mv.set_index(df_mv.columns[0]))
 
     # Display the bar chart in Streamlit
-    chart_data = pd.DataFrame(np.random.randn(20, 1), columns=["a"])
+    chart_data = pd.DataFrame(df_mv, columns=["num_trips"])
     st.bar_chart(chart_data)
     
     st.info("Add a refresh policy to keep the continuous aggregate up-to-date: ",
