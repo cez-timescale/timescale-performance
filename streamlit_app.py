@@ -1,4 +1,6 @@
 import streamlit as st
+import pandas as pd
+import numpy as np
 import time
 
 st.title("TimescaleDB vs PostgreSQL")
@@ -131,9 +133,14 @@ with continuous_aggregation_tab:
     df_base_table = conn.query(query, ttl="0")
     base_table_end_time = time.time()
 
-    # Display results
+    # Display base table results
     st.subheader("Querying raw data - {0:4.1f} sec".format ((base_table_end_time - base_table_start_time)))  
     st.dataframe(df_base_table.set_index(df_base_table.columns[0]))
+
+    # Display the bar chart in Streamlit
+    data = get_data()
+    st.bar_chart(data.set_index('interval'))
+
 
     # Run MV query
     query = "SELECT * FROM ride_stats_by_hour;"
@@ -141,7 +148,7 @@ with continuous_aggregation_tab:
     df_mv = conn.query(query, ttl="0")
     mv_end_time = time.time()
 
-    # Display results
+    # Display MV results
     st.subheader("Querying MV - {0:4.1f} sec".format ((mv_end_time - mv_start_time)))  
     st.dataframe(df_mv.set_index(df_mv.columns[0]))
 
