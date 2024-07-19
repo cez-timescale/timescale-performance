@@ -128,7 +128,7 @@ with continuous_aggregation_tab:
     )
 
     # Run base table query
-    query = "SELECT time_bucket('60 minute', pickup_datetime) AS interval, count(*) as num_trips, round(avg(fare_amount),2) as avg_fare, avg(dropoff_datetime - pickup_datetime) as avg_trip_duration, round(avg(EXTRACT(EPOCH FROM (dropoff_datetime - pickup_datetime)))/60,2) as avg_trip_duration_min FROM rides WHERE pickup_datetime < '2016-01-08 00:00' GROUP BY interval;"
+    query = "SELECT time_bucket('60 minute', pickup_datetime) AS interval, count(*) as num_trips FROM rides WHERE pickup_datetime < '2016-01-08 00:00' GROUP BY interval;"
     base_table_start_time = time.time()
     df_base_table = conn.query(query, ttl="0")
     base_table_end_time = time.time()
@@ -138,11 +138,11 @@ with continuous_aggregation_tab:
     st.dataframe(df_base_table.set_index(df_base_table.columns[0]))
 
     # Display the bar chart in Streamlit
-    st.bar_chart(df_base_table.set_index('interval'))
+    st.bar_chart(df_base_table)
 
 
     # Run MV query
-    query = "SELECT * FROM ride_stats_by_hour;"
+    query = "SELECT interval, num_trips FROM ride_stats_by_hour;"
     mv_start_time = time.time()
     df_mv = conn.query(query, ttl="0")
     mv_end_time = time.time()
