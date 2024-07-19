@@ -150,7 +150,7 @@ with continuous_aggregation_tab:
 
     # Display the bar chart in Streamlit
     df_chart = pd.melt(
-        df_mv.reset_index(), id_vars="interval", value_name="num_trips"
+        df_mv.reset_index(), id_vars="interval", value_name="num_trips", value_name="num_trips"
     )
     chart = (
         alt.Chart(df_chart)
