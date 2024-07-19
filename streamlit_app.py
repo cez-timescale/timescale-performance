@@ -151,8 +151,8 @@ with continuous_aggregation_tab:
     # Display the bar chart in Streamlit
     chart_data = pd.DataFrame(np.random.randn(20, 3), columns=["a", "b", "c"])
     st.bar_chart(chart_data)
-
-
+    st.bar_chart(df_mv)
+    
     st.info("Add a refresh policy to keep the continuous aggregate up-to-date: ",
     icon="✍️"
     ) 
