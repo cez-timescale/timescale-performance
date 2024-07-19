@@ -91,7 +91,7 @@ with compression_tab:
     "ALTER TABLE rides SET (timescaledb.compress, timescaledb.compress_segmentby='vendor_id', timescaledb.compress_orderby='pickup_datetime DESC');"    
     )
     
-    query = "SELECT 'rides' as table_name, pg_size_pretty(before_compression_total_bytes) as Total_Bytes_Before_Compression, pg_size_pretty(after_compression_total_bytes) as Total_Bytes_After_Compression, round(before_compression_total_bytes / after_compression_total_bytes::numeric, 2) as Compression_Ratio, round(1- after_compression_total_bytes / before_compression_total_bytes::numeric , 3) * 100 as Compression_Pct FROM hypertable_compression_stats('rides');"
+    query = "SELECT pg_size_pretty(before_compression_total_bytes) as Total_Bytes_Before_Compression, pg_size_pretty(after_compression_total_bytes) as Total_Bytes_After_Compression, round(before_compression_total_bytes / after_compression_total_bytes::numeric, 2) as Compression_Ratio, round(1- after_compression_total_bytes / before_compression_total_bytes::numeric , 3) * 100 as Compression_Pct FROM hypertable_compression_stats('rides');"
     df_compression = conn.query(query, ttl="0")
     st.dataframe(df_compression.set_index(df_compression.columns[0]))
 
