@@ -138,7 +138,7 @@ with continuous_aggregation_tab:
     st.dataframe(df_base_table.set_index(df_base_table.columns[0]))
 
     # Display the bar chart in Streamlit
-    data = get_data()
+    data = df_base_table()
     st.bar_chart(data.set_index('interval'))
 
 
