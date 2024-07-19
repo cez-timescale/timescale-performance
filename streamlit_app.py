@@ -138,8 +138,7 @@ with continuous_aggregation_tab:
     st.dataframe(df_base_table.set_index(df_base_table.columns[0]))
 
     # Display the bar chart in Streamlit
-    st.bar_chart(df_base_table)
-
+ #   st.bar_chart(df_base_table)
 
     # Run MV query
     query = "SELECT interval, num_trips FROM ride_stats_by_hour;"
