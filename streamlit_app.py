@@ -126,7 +126,7 @@ with continuous_aggregation_tab:
     )
 
     # Run base table query
-    query = "SELECT time_bucket('60 minute', pickup_datetime) AS interval, count(*) as num_trips FROM rides WHERE pickup_datetime < '2016-01-08 00:00' GROUP BY interval;"
+    query = "SELECT time_bucket('60 minute', pickup_datetime) AS interval, count(*) as num_trips FROM rides WHERE pickup_datetime < '2016-01-08 00:00' GROUP BY interval GROUP BY interval ASC;"
     base_table_start_time = time.time()
     df_base_table = conn.query(query, ttl="0")
     base_table_end_time = time.time()
@@ -136,7 +136,7 @@ with continuous_aggregation_tab:
     st.dataframe(df_base_table.set_index(df_base_table.columns[0]))
 
     # Run MV query
-    query = "SELECT interval, num_trips FROM ride_stats_by_hour;"
+    query = "SELECT interval, num_trips FROM ride_stats_by_hour GROUP BY interval ASC;"
     mv_start_time = time.time()
     df_mv = conn.query(query, ttl="0")
     mv_end_time = time.time()
