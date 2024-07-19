@@ -56,7 +56,7 @@ with hypertable_tab:
             )
 
             st.info(
-            "To setup Additional partitioning dimension to speed up queries, run the following: ",
+            "To setup additional partitioning dimensions to speed up queries (eg for GROUP BY ops), run the following: ",
             icon="✍️",
             )
 
@@ -103,7 +103,7 @@ with compression_tab:
     ) 
 
     st.info(
-    "Compression policy allows to compress data older than a particular age. To set a policy run the following command: ",
+    "Compression policy enables automated compression of older than a particular age. To set a policy run the following command: ",
     icon="✍️",
     )
 
