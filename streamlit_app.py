@@ -125,9 +125,20 @@ with continuous_aggregation_tab:
     "CREATE MATERIALIZED VIEW ride_stats_by_hour WITH (timescaledb.continuous) AS SELECT time_bucket('60 minute', pickup_datetime) AS interval, count(*) as num_trips, round(avg(fare_amount),2) as avg_fare, avg(dropoff_datetime - pickup_datetime) as avg_trip_duration, round(avg(EXTRACT(EPOCH FROM (dropoff_datetime - pickup_datetime)))/60,2) as avg_trip_duration_min FROM rides WHERE pickup_datetime < '2016-01-08 00:00' GROUP BY interval;"
     )
 
+    # Run query
     query = "SELECT time_bucket('60 minute', pickup_datetime) AS interval, count(*) as num_trips, round(avg(fare_amount),2) as avg_fare, avg(dropoff_datetime - pickup_datetime) as avg_trip_duration, round(avg(EXTRACT(EPOCH FROM (dropoff_datetime - pickup_datetime)))/60,2) as avg_trip_duration_min FROM rides WHERE pickup_datetime < '2016-01-08 00:00' GROUP BY interval;"
+    base_table_start_time = time.time()
     df_base_table = conn.query(query, ttl="0")
+    base_table_end_time = time.time()
+
+    #Disply results
+    st.subheader("Hypertable - {0:4.1f} sec".format ((base_table_end_time - base_table_start_time)))  
     st.dataframe(df_base_table.set_index(df_base_table.columns[0]))
+
+
+
+    df = conn.query('SELECT rate_code, COUNT(vendor_id) AS num_trips FROM rides GROUP BY rate_code ORDER BY rate_code;', ttl="0")
+    hypertable_end_time = time.time()
 
     query = "SELECT * FROM ride_stats_by_hour;"
     df_mv = conn.query(query, ttl="0")
