@@ -136,7 +136,8 @@ with continuous_aggregation_tab:
 
     # Display base table results
     st.subheader("Querying raw data - {0:4.1f} sec".format ((base_table_end_time - base_table_start_time)))  
-    st.dataframe(df_base_table.set_index(df_base_table.columns[0]))
+    chart_data = pd.DataFrame(df_base_table, columns=["num_trips"])
+    st.bar_chart(chart_data)
 
     # Run MV query
     query = "SELECT interval, num_trips FROM ride_stats_by_hour ORDER BY interval ASC;"
@@ -146,9 +147,6 @@ with continuous_aggregation_tab:
 
     # Display MV results
     st.subheader("Querying MV - {0:4.1f} sec".format ((mv_end_time - mv_start_time)))  
-    st.dataframe(df_mv.set_index(df_mv.columns[0]))
-
-    # Display the bar chart in Streamlit
     chart_data = pd.DataFrame(df_mv, columns=["num_trips"])
     st.bar_chart(chart_data)
     
