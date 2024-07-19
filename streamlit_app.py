@@ -1,4 +1,6 @@
 import streamlit as st
+import pandas as pd
+import numpy as np
 import time
 
 st.title("TimescaleDB vs PostgreSQL")
@@ -146,7 +148,9 @@ with continuous_aggregation_tab:
     st.dataframe(df_mv.set_index(df_mv.columns[0]))
 
     # Display the bar chart in Streamlit
-    st.bar_chart(df_mv)
+    mv_chart_data = pd.DataFrame(df_mv)
+
+st.bar_chart(chart_data)
 
     st.info("Add a refresh policy to keep the continuous aggregate up-to-date: ",
     icon="✍️"
