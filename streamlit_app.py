@@ -126,6 +126,10 @@ with continuous_aggregation_tab:
     )
 
     query = "SELECT time_bucket('60 minute', pickup_datetime) AS interval, count(*) as num_trips, round(avg(fare_amount),2) as avg_fare, avg(dropoff_datetime - pickup_datetime) as avg_trip_duration, round(avg(EXTRACT(EPOCH FROM (dropoff_datetime - pickup_datetime)))/60,2) as avg_trip_duration_min FROM rides WHERE pickup_datetime < '2016-01-08 00:00' GROUP BY interval;"
+    df_base_table = conn.query(query, ttl="0")
+    st.dataframe(df_base_table.set_index(df_base_table.columns[0]))
+
+    query = "SELECT * FROM ride_stats_by_hour;"
     df_mv = conn.query(query, ttl="0")
     st.dataframe(df_mv.set_index(df_mv.columns[0]))
 
