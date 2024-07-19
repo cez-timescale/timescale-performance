@@ -113,8 +113,13 @@ with compression_tab:
 
 
 with continuous_aggregation_tab:
-    st.write("Continuous aggregates are designed to make queries on very large datasets run faster. Timescale continuous aggregates use PostgreSQL materialized views to continuously and incrementally refresh a query in the background, so that when you run the query, only the data that has changed needs to be computed, not the entire dataset.")
-    st.write("To create & query continuous aggregate: ")
+    st.info("Continuous aggregates are designed to make queries on very large datasets run faster. Timescale continuous aggregates use PostgreSQL materialized views to continuously and incrementally refresh a query in the background, so that when you run the query, only the data that has changed needs to be computed, not the entire dataset." ,
+    icon="✍️"
+    )
+    
+    st.info("To create & query continuous aggregate: ",
+    icon="✍️"
+    )
 
 with data_retention_tab:
     st.write("WIP")
