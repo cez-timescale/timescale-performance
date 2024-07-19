@@ -145,6 +145,8 @@ with continuous_aggregation_tab:
     st.subheader("Querying MV - {0:4.1f} sec".format ((mv_end_time - mv_start_time)))  
     st.dataframe(df_mv.set_index(df_mv.columns[0]))
 
+    # Display the bar chart in Streamlit
+    st.bar_chart(df_mv)
 
     st.info("Add a refresh policy to keep the continuous aggregate up-to-date: ",
     icon="✍️"
