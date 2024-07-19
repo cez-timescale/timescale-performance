@@ -122,7 +122,15 @@ with continuous_aggregation_tab:
     )
 
     st.success(
-    "CREATE MATERIALIZED VIEW ride_stats_by_hour WITH (timescaledb.continuous) AS SELECT time_bucket('60 minute', pickup_datetime) AS interval, count(*) as num_trips, round(avg(fare_amount),2) as avg_fare, avg(dropoff_datetime - pickup_datetime) as avg_trip_duration, round(avg(EXTRACT(EPOCH FROM (dropoff_datetime - pickup_datetime)))/60,2) as avg_trip_duration_min FROM rides WHERE pickup_datetime < '2016-01-08 00:00' GROUP BY interval;"    
+    "CREATE MATERIALIZED VIEW ride_stats_by_hour WITH (timescaledb.continuous) AS SELECT time_bucket('60 minute', pickup_datetime) AS interval, count(*) as num_trips, round(avg(fare_amount),2) as avg_fare, avg(dropoff_datetime - pickup_datetime) as avg_trip_duration, round(avg(EXTRACT(EPOCH FROM (dropoff_datetime - pickup_datetime)))/60,2) as avg_trip_duration_min FROM rides WHERE pickup_datetime < '2016-01-08 00:00' GROUP BY interval;"
+    )
+
+    st.info("Add a refresh policy to keep the continuous aggregate up-to-date: ",
+    icon="✍️"
+    ) 
+
+    st.success(
+    "SELECT add_continuous_aggregate_policy ('ride_stats_by_hour', start_offset => NULL, end_offset => INTERVAL '1 hour', schedule_interval => INTERVAL '1 hour');"
     )
 
 with data_retention_tab:
