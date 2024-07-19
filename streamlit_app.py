@@ -121,6 +121,10 @@ with continuous_aggregation_tab:
     icon="✍️"
     )
 
+    st.success(
+    "CREATE MATERIALIZED VIEW ride_stats_by_hour WITH (timescaledb.continuous) AS SELECT time_bucket('60 minute', pickup_datetime) AS interval, count(*) as num_trips, round(avg(fare_amount),2) as avg_fare, avg(dropoff_datetime - pickup_datetime) as avg_trip_duration, round(avg(EXTRACT(EPOCH FROM (dropoff_datetime - pickup_datetime)))/60,2) as avg_trip_duration_min FROM rides WHERE pickup_datetime < '2016-01-08 00:00' GROUP BY interval;"    
+    )
+
 with data_retention_tab:
     st.write("WIP")
     
