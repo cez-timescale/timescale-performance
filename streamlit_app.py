@@ -135,7 +135,7 @@ with continuous_aggregation_tab:
     base_table_end_time = time.time()
 
     # Display base table results
-    st.subheader("Querying raw data - {0:4.1f} sec".format ((base_table_end_time - base_table_start_time)))  
+    st.subheader("Querying raw data - {0:4.2f} sec".format ((base_table_end_time - base_table_start_time)))  
     chart_data = pd.DataFrame(df_base_table, columns=["num_trips"])
     st.bar_chart(chart_data)
 
@@ -146,7 +146,7 @@ with continuous_aggregation_tab:
     mv_end_time = time.time()
 
     # Display materialized_view results
-    st.subheader("Querying Materialized View - {0:4.1f} sec".format ((mv_end_time - mv_start_time)))  
+    st.subheader("Querying Materialized View - {0:4.2f} sec".format ((mv_end_time - mv_start_time)))  
     chart_data = pd.DataFrame(df_mv, columns=["num_trips"])
     st.bar_chart(chart_data)
     
