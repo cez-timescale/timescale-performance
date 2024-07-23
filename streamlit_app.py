@@ -91,7 +91,7 @@ with compression_tab:
     )
 
     st.success(
-    "ALTER TABLE rides SET (timescaledb.compress, timescaledb.compress_segmentby='rate_code, payment_type', timescaledb.compress_orderby='pickup_datetime DESC');"    
+    "ALTER TABLE rides /n/nSET (timescaledb.compress, timescaledb.compress_segmentby='rate_code, payment_type', timescaledb.compress_orderby='pickup_datetime DESC');"    
     )
     
     query = "SELECT pg_size_pretty(before_compression_total_bytes) as Total_Bytes_Before_Compression, pg_size_pretty(after_compression_total_bytes) as Total_Bytes_After_Compression, round(before_compression_total_bytes / after_compression_total_bytes::numeric, 2) as Compression_Ratio, round(1- after_compression_total_bytes / before_compression_total_bytes::numeric , 3) * 100 as Compression_Pct FROM hypertable_compression_stats('rides');"
