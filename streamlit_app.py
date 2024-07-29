@@ -55,7 +55,7 @@ with hypertable_tab:
             )
 
             st.success(
-            "SELECT create_hypertable('rides', by_range('pickup_datetime'), create_default_indexes=>FALSE);"
+            "SELECT create_hypertable('nyc_rides', by_range('pickup_datetime'), create_default_indexes=>FALSE);"
             )
 
             st.info(
@@ -64,11 +64,11 @@ with hypertable_tab:
             )
 
             st.success(
-            "SELECT add_dimension('rides', by_hash('payment_type', 2));"    
+            "SELECT add_dimension('nyc_rides', by_hash('payment_type', 2));"    
             )
 
             st.success(
-            "SELECT add_dimension('rides', by_hash('rate_code', 2));"
+            "SELECT add_dimension('nyc_rides', by_hash('rate_code', 2));"
             )
 
         with postgresql:
@@ -81,7 +81,7 @@ with hypertable_tab:
             )
 
             st.success(
-            "CREATE TABLE  rides (vendor_id TEXT, pickup_datetime TIMESTAMP WITHOUT TIME ZONE NOT NULL, dropoff_datetime TIMESTAMP WITHOUT TIME ZONE NOT NULL, passenger_count NUMERIC, trip_distance NUMERIC, pickup_longitude NUMERIC, pickup_latitude NUMERIC, rate_code INTEGER, dropoff_longitude NUMERIC, dropoff_latitude  NUMERIC, payment_type INTEGER, fare_amount NUMERIC, extra NUMERIC, mta_tax NUMERIC, tip_amount NUMERIC, tolls_amount NUMERIC, improvement_surcharge NUMERIC, total_amount NUMERIC);"
+            "CREATE TABLE nyc_rides (vendor_id TEXT, pickup_datetime TIMESTAMP WITHOUT TIME ZONE NOT NULL, dropoff_datetime TIMESTAMP WITHOUT TIME ZONE NOT NULL, passenger_count NUMERIC, trip_distance NUMERIC, pickup_longitude NUMERIC, pickup_latitude NUMERIC, rate_code INTEGER, dropoff_longitude NUMERIC, dropoff_latitude  NUMERIC, payment_type INTEGER, fare_amount NUMERIC, extra NUMERIC, mta_tax NUMERIC, tip_amount NUMERIC, tolls_amount NUMERIC, improvement_surcharge NUMERIC, total_amount NUMERIC);"
             )
 
 with compression_tab:
@@ -91,10 +91,10 @@ with compression_tab:
     )
 
     st.success(
-    "ALTER TABLE rides SET (timescaledb.compress, timescaledb.compress_segmentby='rate_code, payment_type', timescaledb.compress_orderby='pickup_datetime DESC');"    
+    "ALTER TABLE nyc_rides SET (timescaledb.compress, timescaledb.compress_segmentby='rate_code, payment_type', timescaledb.compress_orderby='pickup_datetime DESC');"    
     )
     
-    query = "SELECT pg_size_pretty(before_compression_total_bytes) as Total_Bytes_Before_Compression, pg_size_pretty(after_compression_total_bytes) as Total_Bytes_After_Compression, round(before_compression_total_bytes / after_compression_total_bytes::numeric, 2) as Compression_Ratio, round(1- after_compression_total_bytes / before_compression_total_bytes::numeric , 3) * 100 as Compression_Pct FROM hypertable_compression_stats('rides');"
+    query = "SELECT pg_size_pretty(before_compression_total_bytes) as Total_Bytes_Before_Compression, pg_size_pretty(after_compression_total_bytes) as Total_Bytes_After_Compression, round(before_compression_total_bytes / after_compression_total_bytes::numeric, 2) as Compression_Ratio, round(1- after_compression_total_bytes / before_compression_total_bytes::numeric , 3) * 100 as Compression_Pct FROM hypertable_compression_stats('nyc_rides');"
     df_compression = conn.query(query, ttl="0")
     st.dataframe(df_compression.set_index(df_compression.columns[0]))
 
