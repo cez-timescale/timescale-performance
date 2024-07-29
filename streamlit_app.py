@@ -22,7 +22,7 @@ with hypertable_tab:
     )
 
     st.success(
-    "SELECT rate_code, COUNT(vendor_id) AS num_trips FROM rides GROUP BY rate_code ORDER BY rate_code;"
+    "SELECT rate_code, COUNT(vendor_id) AS num_trips FROM nyc_rides GROUP BY rate_code ORDER BY rate_code;"
     )
     
     # Initialize connection.
@@ -30,12 +30,12 @@ with hypertable_tab:
 
     # Perform hypertable query.
     hypertable_start_time = time.time()
-    df = conn.query('SELECT rate_code, COUNT(vendor_id) AS num_trips FROM rides GROUP BY rate_code ORDER BY rate_code;', ttl="0")
+    df = conn.query('SELECT rate_code, COUNT(vendor_id) AS num_trips FROM nyc_rides GROUP BY rate_code ORDER BY rate_code;', ttl="0")
     hypertable_end_time = time.time()
 
     # Perform pg query.
     postgresql_start_time = time.time()
-    df_pg = conn.query('SELECT rate_code, COUNT(vendor_id) AS num_trips FROM rides_pg_table GROUP BY rate_code ORDER BY rate_code;', ttl="0")
+    df_pg = conn.query('SELECT rate_code, COUNT(vendor_id) AS num_trips FROM nyc_rides_pg_table GROUP BY rate_code ORDER BY rate_code;', ttl="0")
     postgresql_end_time = time.time()
 
     # Print results.
