@@ -125,11 +125,11 @@ with continuous_aggregation_tab:
     )
 
     st.success(
-    "CREATE MATERIALIZED VIEW ride_stats_by_hour WITH (timescaledb.continuous) AS SELECT time_bucket('60 minute', pickup_datetime) AS interval, count(*) as num_trips, round(avg(fare_amount),2) as avg_fare, avg(dropoff_datetime - pickup_datetime) as avg_trip_duration, round(avg(EXTRACT(EPOCH FROM (dropoff_datetime - pickup_datetime)))/60,2) as avg_trip_duration_min FROM rides WHERE pickup_datetime < '2016-01-08 00:00' GROUP BY interval;"
+    "CREATE MATERIALIZED VIEW nyc_ride_stats_by_hour WITH (timescaledb.continuous) AS SELECT time_bucket('60 minute', pickup_datetime) AS interval, count(*) as num_trips, round(avg(fare_amount),2) as avg_fare, avg(dropoff_datetime - pickup_datetime) as avg_trip_duration, round(avg(EXTRACT(EPOCH FROM (dropoff_datetime - pickup_datetime)))/60,2) as avg_trip_duration_min FROM nyc_rides WHERE pickup_datetime < '2016-01-08 00:00' GROUP BY interval;"
     )
 
     # Run base table query
-    query = "SELECT time_bucket('60 minute', pickup_datetime) AS interval, count(*) as num_trips FROM rides WHERE pickup_datetime < '2016-01-08 00:00' GROUP BY interval ORDER BY interval ASC;"
+    query = "SELECT time_bucket('60 minute', pickup_datetime) AS interval, count(*) as num_trips FROM nyc_rides WHERE pickup_datetime < '2016-01-08 00:00' GROUP BY interval ORDER BY interval ASC;"
     base_table_start_time = time.time()
     df_base_table = conn.query(query, ttl="0")
     base_table_end_time = time.time()
@@ -140,7 +140,7 @@ with continuous_aggregation_tab:
     st.bar_chart(chart_data)
 
     # Run materialized_view query
-    query = "SELECT interval, num_trips FROM ride_stats_by_hour ORDER BY interval ASC;"
+    query = "SELECT interval, num_trips FROM nyc_ride_stats_by_hour ORDER BY interval ASC;"
     mv_start_time = time.time()
     df_mv = conn.query(query, ttl="0")
     mv_end_time = time.time()
@@ -155,7 +155,7 @@ with continuous_aggregation_tab:
     ) 
 
     st.success(
-    "SELECT add_continuous_aggregate_policy ('ride_stats_by_hour', start_offset => NULL, end_offset => INTERVAL '1 hour', schedule_interval => INTERVAL '1 hour');"
+    "SELECT add_continuous_aggregate_policy ('nyc_ride_stats_by_hour', start_offset => NULL, end_offset => INTERVAL '1 hour', schedule_interval => INTERVAL '1 hour');"
     )
 
 with data_retention_tab:
