@@ -111,7 +111,7 @@ with compression_tab:
     )
 
     st.success(
-    "SELECT add_compression_policy('rides', INTERVAL '1 day');"    
+    "SELECT add_compression_policy('nyc_rides', INTERVAL '1 day');"    
     )
 
 
